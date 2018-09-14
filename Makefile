@@ -44,6 +44,8 @@ pre-push:
 post-push:
 
 
+login:
+	@docker login -u "$(DOCKER_USER)" -p "$(DOCKER_PASS)"
 
 docker-build: .release
 	docker build $(DOCKER_BUILD_ARGS) -t $(IMAGE):$(VERSION) $(DOCKER_BUILD_CONTEXT) -f $(DOCKER_FILE_PATH)
@@ -64,7 +66,7 @@ docker-build: .release
 	@cat .release
 
 
-release: check-status check-release build push
+release: check-status check-release build login push
 
 
 push: pre-push do-push post-push 
