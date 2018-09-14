@@ -1,0 +1,13 @@
+sudo: required
+language: php
+php:
+  - 7.2
+  - 7.1
+  - 7.0
+
+services:
+  - docker
+
+script:
+  - make lint
+  - make build tag push
