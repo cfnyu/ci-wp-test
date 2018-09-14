@@ -72,7 +72,7 @@ release: check-status check-release build login push
 push: pre-push do-push post-push 
 
 do-push: 
-	docker ps $(IMAGE):$(VERSION)
+	docker push $(IMAGE):$(VERSION)
 	docker push $(IMAGE):latest
 
 snapshot: build push
