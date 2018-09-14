@@ -13,4 +13,4 @@ install:
   - docker run -d -p 127.0.0.1:80:80 --name ci-wp-test ci-wp-test
 
 script:
-  - docker ps | grep -q ci-wp-test
+  - docker ps | grep -q -e 'ci-wp-test$'
