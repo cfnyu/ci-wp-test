@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+if [ ! -f /var/www/.env ]; then 
+    touch /var/www/.env
+fi
+
 chown www-data:www-data /var/www/.env
 
 if [ ! -d /var/www/.wp-cli ]; then
