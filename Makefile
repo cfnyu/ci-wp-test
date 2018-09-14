@@ -28,12 +28,11 @@ DOCKER_BUILD_CONTEXT=.
 DOCKER_FILE_PATH=Dockerfile
 
 .PHONY: pre-build docker-build post-build build release patch-release minor-release major-release tag check-status check-release showver \
-	push pre-push do-push post-push
+	push pre-push do-push post-push login lint
 
 build: pre-build docker-build post-build
 
 pre-build:
-
 
 post-build:
 
@@ -43,6 +42,11 @@ pre-push:
 
 post-push:
 
+lint: 
+	docker run -d -p 127.0.0.1:80:80 --name $(NAME) $(IMAGE):$(VERSION)
+	sleep 10
+	docker ps | grep -q -e '$(NAME)$$'
+	docker kill $(NAME); docker rm $(NAME)
 
 login:
 	@docker login -u "$(DOCKER_USER)" -p "$(DOCKER_PASS)"
