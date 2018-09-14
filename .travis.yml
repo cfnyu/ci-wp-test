@@ -5,5 +5,12 @@ php:
   - 7.1
   - 7.0
 
+services:
+  - docker
+
+install:
+  - docker build -t ci-wp-test .
+  - docker run -d -p 127.0.0.1:80:80 --name ci-wp-test ci-wp-test
+
 script:
-  - make patch-release
+  - docker ps | grep -q ci-wp-test
